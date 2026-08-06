@@ -1,0 +1,130 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1f4068, #162447);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+
+.stopwatch-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 80px 60px;
+  border-radius: 100%;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+}
+
+.stopwatch-title {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: #e4e4e4;
+}
+
+
+.timer-display {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: #0f172a;
+  padding: 20px 10px;
+  border-radius: 12px;
+  border: 2px solid #334155;
+  margin-bottom: 35px;
+  color: #38bdf8;
+  box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.btn-start {
+  background-color: #10b981;
+  color: white;
+}
+
+.btn-start:hover:not(:disabled) {
+  background-color: #059669;
+}
+
+.btn-stop {
+  background-color: #ef4444;
+  color: white;
+}
+
+.btn-stop:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+.btn-reset {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.btn-reset:hover:not(:disabled) {
+  background-color: #d97706;
+}
+
+
+@media (max-width: 480px) {
+  .timer-display {
+    font-size: 2.2rem;
+  }
+  
+  .stopwatch-card {
+    padding: 25px 15px;
+  }
+} 
