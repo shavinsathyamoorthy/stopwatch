@@ -1,77 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React, { useEffect, useState } from 'react'
 
-function Stopwatch() {
-  const [seconds, setSeconds] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
+export default function Testing() {
+  const [milliSec,setMilliSec] = useState(0);
+  const [isRunning,setIsRunning] = useState(false);
+
+  const toggle = ()=>{
+    setIsRunning((hello) => !hello);
+  };
 
   useEffect(() => {
     let interval = null;
 
     if (isRunning) {
       interval = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
-      }, 1000);
-    } else {
-      clearInterval(interval);
+        setMilliSec((prevSec) => prevSec + 10);
+      },10);
     }
+    return ()=> clearInterval(interval);
+  },[isRunning]);
 
-    // Cleanup function to clear the interval to avoid memory leaks
-    return () => clearInterval(interval);
-  }, [isRunning]);
+  const format = () => {
+    const getHours = Math.floor(milliSec / 3600000);
+    const getMinutes = Math.floor((milliSec % 3600000) / 60000);
+    const getSeconds = Math.floor((milliSec % 60000) / 1000);
+    const getMilliSeconds = Math.floor((milliSec % 1000) / 10);
 
-  // Format time into HH : MM : SS
-  const formatTime = () => {
-    const getHours = Math.floor(seconds / 3600);
-    const getMinutes = Math.floor((seconds % 3600) / 60);
-    const getSeconds = seconds % 60;
+    const formatHours = String(getHours).padStart(2,0);
+    const formatMinutes = String(getMinutes).padStart(2,0);
+    const formatSeconds = String(getSeconds).padStart(2,0);
+    const formatMilliSeconds = String(getMilliSeconds).padStart(2,0);
 
-    const formattedHours = String(getHours).padStart(2, '0');
-    const formattedMinutes = String(getMinutes).padStart(2, '0');
-    const formattedSeconds = String(getSeconds).padStart(2, '0');
-
-    return `${formattedHours} : ${formattedMinutes} : ${formattedSeconds}`;
+    return `${formatHours} : ${formatMinutes} : ${formatSeconds} : ${formatMilliSeconds}`
   };
 
-  const handleStart = () => setIsRunning(true);
-  const handleStop = () => setIsRunning(false);
   const handleReset = () => {
     setIsRunning(false);
-    setSeconds(0);
-  };
-
+    setMilliSec(0);
+  }; 
   return (
-    <div className="stopwatch-card">
-      <h2 className="stopwatch-title">Stopwatch</h2>
-      
-      <div className="timer-display">
-        {formatTime()}
+    <div className='hero'>
+      <div className="hello">
+      <span className='title'>Stop Watch</span>
+      </div>
+      <div className={`format ${isRunning ? 'floating' : ''}`}>
+          {format()}
       </div>
 
-      <div className="button-group">
-        <button 
-          className="btn btn-start" 
-          onClick={handleStart} 
-          disabled={isRunning}
-        >
-          Start
-        </button>
-        <button 
-          className="btn btn-stop" 
-          onClick={handleStop} 
-          disabled={!isRunning}
-        >
-          Stop
-        </button>
-        <button 
-          className="btn btn-reset" 
-          onClick={handleReset}
-        >
-          Reset
-        </button>
+      <div className='btns'>
+        <button className={isRunning ? 'btn btn-stop' : 'btn btn-start'} onClick={toggle}>{isRunning ? 'Stop' : 'Start'}</button>
+        <button className='reset' onClick={handleReset}>Reset</button>
       </div>
     </div>
-  );
+  )
 }
-
-export default Stopwatch;
